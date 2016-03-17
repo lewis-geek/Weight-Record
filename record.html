@@ -1,0 +1,331 @@
+<!DOCTYPE html height="100%">
+<html id="record" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>体重记录</title>
+    <meta http-equiv="Cache-Control" content="no-transform no-siteapp"/>
+    <meta name="mobile-web-app-capable" content="yes"/>
+    <meta name="apple-touch-fullscreen" content="yes"/>
+    <meta name="apple-mobile-web-app-title" content="BMI测试">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="x5-orientation" content="portrait">
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="browsermode" content="application">
+    <meta name="x5-page-mode" content="app">
+    <link rel="shortcut icon" href="imgs/icon/active_love_144X114.png">
+    <link rel="bookmark" href="imgs/icon/active_love_144X114.png">
+    <link rel="apple-touch-icon" href="imgs/icon/active_love_144X114.png">
+    <link rel="stylesheet" href="style/font-awesome.min.css">
+    <link rel="stylesheet" href="style/reset.css">
+    <link rel="stylesheet" href="style/main.css">
+    <script src="script/jquery-2.2.1.min.js"></script>
+    <script src="script/velocity.min.js"></script>
+    <script src="script/velocity.ui.min.js"></script>
+    <script src="script/jquery.validate.min.js"></script>
+    <script src="script/echarts.common.min.js"></script>
+    <script src="script/macarons.js"></script>
+    <script src="script/main.js"></script>
+    <!--<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");-->
+    <!--document.write(unescape("%3Cspan id='cnzz_stat_icon_1256445810'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1256445810' type='text/javascript'%3E%3C/script%3E"));</script>-->
+</head>
+<body height="100%">
+<div class="overlay_region">
+    <div class="login_region">
+        <i class="fa fa-times"></i>
+        <div class="login_container">
+            <h2>Log in</h2>
+            <form action="#" id="login_form" method="post">
+                <input type="text" class="login_text_input" placeholder="Account" name="account">
+                <input type="password" class="login_password_input" placeholder="Password" name="password">
+                <span id="login-error-info"></span>
+                <span class="quick-switch">Don't have an account? Click here to sign up.</span>
+                <label class="remember_me_label" for="check-box">
+                    <input type="checkbox" checked="checked" id="check-box">
+                    <span class="remember-me-form-control">
+                        <i class="fa fa-check check-active"></i>
+                    </span>
+                    Remember me
+                </label>
+                <div class="rest_password">
+                    <a href="#">Rest Password</a>
+                </div>
+                <p class="submit-button">
+                    <button type="submit" class="login-btn submit-btn submit" value="Log In">Log In</button>
+                </p>
+            </form>
+        </div>
+    </div>
+    <div class="signup_region">
+        <i class="fa fa-times"></i>
+        <div class="signup_container">
+            <h2>Sign up</h2>
+            <form action="#" id="signup_form" method="post">
+                <input type="text" class="signup_text_input" placeholder="New Name" name="account">
+                <input type="password" class="signup_password_input" placeholder="Password" name="password">
+                <span id="signup-error-info"></span>
+                <span class="quick-switch">Already have an account? Click here to log in.</span>
+                <p class="submit-button">
+                    <button type="submit" class="signup-btn submit-btn" value="Sign Up Free">Sign Up</button>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="header">
+    <div class="title">
+        <div class="header_banner">
+            <h1 class="suc_logo fl">LogIn</h1>
+        </div>
+        <a href="#" class="menu">
+            <i class="fa fa-bars"></i>
+        </a>
+    </div>
+</div>
+<div class="left-banner">
+    <nav class="header_content">
+        <a href="#">About</a>
+        <a href="#">FQA</a>
+    </nav>
+    <div class="mask">
+
+    </div>
+</div>
+<div class="buddy">
+    <div class="content">
+        <div id="chart" style="display: none"></div>
+        <div id="infor" style="display: none">
+            <ul>
+                <li>体重</li>
+                <li>BMI</li>
+                <li>Rate</li>
+                <li>7 days</li>
+                <li>目标</li>
+            </ul>
+            <ul>
+                <li>79.3kg</li>
+                <li>22.0(正常)</li>
+                <li>0.2kg/周</li>
+                <li>0.3kg</li>
+                <li>80.0kg</li>
+            </ul>
+        </div>
+        <div id="statistics" style="display: none">
+            <table border="0" width="100%">
+                <colgroup>
+                    <col width="50%">
+                    <col width="50%">
+                </colgroup>
+                <caption>趋势分析</caption>
+                <tr>
+                    <th>持续时间</th>
+                    <th>kg/周</th>
+                </tr>
+                <tr>
+                    <td>1周</td>
+                    <td>+0.26</td>
+                </tr>
+                <tr>
+                    <td>15天</td>
+                    <td>+0.20</td>
+                </tr>
+                <tr>
+                    <td>1个月</td>
+                    <td>+0.16</td>
+                </tr>
+                <tr>
+                    <td>3个月</td>
+                    <td>+0.14</td>
+                </tr>
+                <tr>
+                    <td>6个月</td>
+                    <td>+0.12</td>
+                </tr>
+                <tr>
+                    <td>1年</td>
+                    <td>+0.06</td>
+                </tr>
+            </table>
+            <table width="100%">
+                <caption>数据库</caption>
+                <tr>
+                    <th>数据数量</th>
+                </tr>
+                <tr>
+                    <td>6条数据</td>
+                    <td>0年,4月,12天</td>
+                </tr>
+                <tr>
+                    <th>总变化</th>
+                </tr>
+                <tr>
+                    <td>3.1kg(4.1%)</td>
+                </tr>
+            </table>
+            <table width="100%">
+                <caption>体重</caption>
+                <tr>
+                    <th>最高记录值</th>
+                </tr>
+                <tr>
+                    <td>73.3kg</td>
+                    <td>2016年3月5日</td>
+                </tr>
+                <tr>
+                    <th>最低记录值</th>
+                </tr>
+                <tr>
+                    <td>76.1kg</td>
+                    <td>2015年11月23日</td>
+                </tr>
+                <tr>
+                    <th>月最高体重增幅</th>
+                </tr>
+                <tr>
+                    <td>2015年11月</td>
+                    <td>0.9kg</td>
+                </tr>
+                <tr>
+                    <th>月最高百分比增幅</th>
+                </tr>
+                <tr>
+                    <td>2015年11月</td>
+                    <td>1.1%</td>
+                </tr>
+            </table>
+        </div>
+        <div id="database">
+            <table width="100%">
+                <colgroup>
+                    <col width="50%">
+                    <col width="50%">
+                </colgroup>
+                <tr>
+                    <th>2016</th>
+                    <th>+1.3 kg(+1.7%)</th>
+                </tr>
+                <tr>
+                    <th>三月</th>
+                    <th>+0.2 kg(+0.2%)</th>
+                </tr>
+                <tr>
+                    <td>
+                        <div>
+                            <span>周六</span>
+                            <span>5</span>
+                            <span>下午2:04</span>
+                        </div>
+                    </td>
+                    <td>体重 79.3kg</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div>
+                            <span>周六</span>
+                            <span>5</span>
+                            <span>下午2:04</span>
+                        </div>
+                    </td>
+                    <td>体重 79.3kg</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div>
+                            <span>周六</span>
+                            <span>5</span>
+                            <span>下午2:04</span>
+                        </div>
+                    </td>
+                    <td>体重 79.3kg</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div>
+                            <span>周六</span>
+                            <span>5</span>
+                            <span>下午2:04</span>
+                        </div>
+                    </td>
+                    <td>体重 79.3kg</td>
+                </tr>
+
+            </table>
+            <table width="100%">
+                <colgroup>
+                    <col width="50%">
+                    <col width="50%">
+                </colgroup>
+                <tr>
+                    <th>2016</th>
+                    <th>+1.3 kg(+1.7%)</th>
+                </tr>
+                <tr>
+                    <th>三月</th>
+                    <th>+0.2 kg(+0.2%)</th>
+                </tr>
+                <tr>
+                    <td>
+                        <div>
+                            <span>周六</span>
+                            <span>5</span>
+                            <span>下午2:04</span>
+                        </div>
+                    </td>
+                    <td>体重 79.3kg</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div>
+                            <span>周六</span>
+                            <span>5</span>
+                            <span>下午2:04</span>
+                        </div>
+                    </td>
+                    <td>体重 79.3kg</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div>
+                            <span>周六</span>
+                            <span>5</span>
+                            <span>下午2:04</span>
+                        </div>
+                    </td>
+                    <td>体重 79.3kg</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div>
+                            <span>周六</span>
+                            <span>5</span>
+                            <span>下午2:04</span>
+                        </div>
+                    </td>
+                    <td>体重 79.3kg</td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+    <!--<div class="footer">-->
+    <!--<div class="copyright">-->
+    <!--<h2>A Pilot Program by <span class="suc_logo_footer">Suclub</span></h2>-->
+    <!--</div>-->
+    <!--<div class="social-links">-->
+    <!--<a href="#">-->
+    <!--<i class="fa fa-wechat"></i>-->
+    <!--</a>-->
+    <!--<a class="margin_left_20px " href="https://github.com/lewis-geek/BMI-Calculator" target="_blank">-->
+    <!--<i class="fa fa-github"></i>-->
+    <!--</a>-->
+    <!--<a class="margin_left_20px " href="http://m.weibo.cn/u/2702499024" target="_blank">-->
+    <!--<i class="fa fa-weibo"></i>-->
+    <!--</a>-->
+    <!--</div>-->
+    <!--</div>-->
+</div>
+</body>
+</html>
